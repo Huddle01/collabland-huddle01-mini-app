@@ -120,8 +120,12 @@ export default async function handler(
       res.status(200).json(response);
     }
     case InteractionType.ModalSubmit: {
-      const response = await handleModalSubmit(interaction);
-      res.status(200).json(response);
+      try {
+        const response = await handleModalSubmit(interaction);
+        res.status(200).json(response);
+      } catch (error) {
+        console.log(error);
+      }
     }
     default: {
       res.status(200).json({
