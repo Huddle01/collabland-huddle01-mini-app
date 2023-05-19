@@ -116,9 +116,12 @@ export default async function handler(
   verifier.verify(req, res);
   switch (interaction.type) {
     case InteractionType.ApplicationCommand: {
-      const response = handleApplicationCommand();
-      res.status(200).json(response);
-    }
+     try { const response = handleApplicationCommand();
+      res.status(200).json(response);}
+      catch (error) {
+        console.log(error);
+      }
+    } 
     case InteractionType.ModalSubmit: {
       try {
         const response = await handleModalSubmit(interaction);
