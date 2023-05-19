@@ -123,5 +123,13 @@ export default async function handler(
       const response = await handleModalSubmit(interaction);
       res.status(200).json(response);
     }
+    default: {
+      res.status(200).json({
+        type: InteractionResponseType.ChannelMessageWithSource,
+        data: {
+          content: "This action is not supported",
+        },
+      });
+    }
   }
 }
