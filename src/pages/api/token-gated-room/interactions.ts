@@ -44,7 +44,7 @@ export default async function handler(
     );
 
     const apiResponse = await apiCall.json();
-    console.log(apiResponse);
+    
     const message = `Your meeting Link: ${apiResponse.data.meetingLink}`;
 
     return {
@@ -87,13 +87,11 @@ export default async function handler(
         chain
       );
     modal.addComponents(firstActionRow);
-
     const secondActionRow =
       new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
         tokenType
       );
-    modal.addComponents(secondActionRow);
-
+    modal.addComponents(secondActionRow)
     const thirdActionRow =
       new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
         tokenAddress
@@ -129,14 +127,6 @@ export default async function handler(
       } catch (error) {
         console.log(error);
       }
-    }
-    default: {
-      res.status(200).json({
-        type: InteractionResponseType.ChannelMessageWithSource,
-        data: {
-          content: "This action is not supported",
-        },
-      });
     }
   }
 }
