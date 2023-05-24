@@ -21,12 +21,12 @@ export default async function handler(
   async function handleModalSubmit(
     interaction: APIModalSubmitInteraction
   ): Promise<APIInteractionResponse> {
-    const components = interaction.data.components;
-    const chain = components[0]?.components[0]?.value;
-    const tokenType = components[1]?.components[0]?.value;
-    const tokenAddress = components[2]?.components[0]?.value;
-    const conditionType = components[3]?.components[0]?.value;
-    const conditionValue = components[4]?.components[0]?.value;
+    const components = interaction?.data?.components;
+    const chain = components?.[0]?.components[0]?.value;
+    const tokenType = components?.[1]?.components[0]?.value;
+    const tokenAddress = components?.[2]?.components[0]?.value;
+    const conditionType = components?.[3]?.components[0]?.value;
+    const conditionValue = components?.[4]?.components[0]?.value;
 
     let apiCall;
 
@@ -88,7 +88,7 @@ export default async function handler(
 
     const apiResponse = await apiCall.json();
 
-    const message = `Your meeting Link: ${apiResponse.data.meetingLink}`;
+    const message = `Your meeting Link: ${apiResponse?.data?.meetingLink}`;
 
     return {
       type: InteractionResponseType.ChannelMessageWithSource,
@@ -189,6 +189,7 @@ export default async function handler(
       } catch (error) {
         console.log(error);
       }
+      break;
     }
     case InteractionType.ModalSubmit: {
       try {
@@ -197,6 +198,7 @@ export default async function handler(
       } catch (error) {
         console.log(error);
       }
+      break;
     }
   }
 }
