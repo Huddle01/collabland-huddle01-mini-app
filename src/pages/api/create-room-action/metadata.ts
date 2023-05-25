@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { MiniAppManifest } from "@collabland/models";
 import {
+    ApplicationCommandOptionType,
     ApplicationCommandType,
     DiscordActionMetadata,
     InteractionType,
@@ -52,10 +53,17 @@ export default function handler(
             name: "create-room-action",
             type: ApplicationCommandType.ChatInput,
             description: "/create-room-action",
-            options: [],
+            options: [
+              {
+                name: "host-wallets",
+                description: "Address of hostWallet",
+                type: ApplicationCommandOptionType.String,
+                required: true,
+              },
+            ],
           },
         ],
       };
-      console.log("Status code", res.statusCode);
+      console.log("Status code Metadata", metadata);
       res.send(metadata);
 }

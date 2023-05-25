@@ -22,73 +22,36 @@ export default async function handler(
     interaction: APIModalSubmitInteraction
   ): Promise<APIInteractionResponse> {
     const components = interaction?.data?.components;
-    const chain = components?.[0]?.components[0]?.value;
-    const tokenType = components?.[1]?.components[0]?.value;
-    const tokenAddress = components?.[2]?.components[0]?.value;
-    const conditionType = components?.[3]?.components[0]?.value;
-    const conditionValue = components?.[4]?.components[0]?.value;
+    const hostWallet = components?.[0]?.components[0]?.value;
+    const chain = components?.[1]?.components[0]?.value;
+    const tokenType = components?.[2]?.components[0]?.value;
+    const tokenAddress = components?.[3]?.components[0]?.value;
 
-    let apiCall;
+    const hostWallets = hostWallet?.split(",");
 
-    if (!conditionType && !conditionValue) {
-      apiCall = await fetch(
-        "https://iriko.testing.huddle01.com/api/v1/create-iframe-room",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            title: "Huddle01 Meet",
-            tokenType: tokenType,
-            chain: chain,
-            contractAddress: [tokenAddress],
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": process.env.API_KEY || "",
-          },
-        }
-      );
-    } else if (conditionValue) {
-      apiCall = await fetch(
-        "https://iriko.testing.huddle01.com/api/v1/create-iframe-room",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            title: "Huddle01 Meet",
-            tokenType: tokenType,
-            chain: chain,
-            contractAddress: [tokenAddress],
-            conditionValue: conditionValue,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": process.env.API_KEY || "",
-          },
-        }
-      );
-    } else {
-      apiCall = await fetch(
-        "https://iriko.testing.huddle01.com/api/v1/create-iframe-room",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            title: "Huddle01 Meet",
-            tokenType: tokenType,
-            chain: chain,
-            contractAddress: [tokenAddress],
-            conditionType: conditionType,
-            conditionValue: conditionValue,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": process.env.API_KEY || "",
-          },
-        }
-      );
-    }
+    const apiCall = await fetch(
+      "https://iriko.testing.huddle01.com/api/v1/create-iframe-room",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          title: "Huddle01 Meet",
+          hostWallets: hostWallets,
+          tokenType: tokenType,
+          chain: chain,
+          contractAddress: [tokenAddress],
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": process.env.API_KEY || "",
+        },
+      }
+    );
 
     const apiResponse = await apiCall.json();
 
     const message = `Your meeting Link: ${apiResponse?.data?.meetingLink}`;
+
+    console.log(tokenAddress, hostWallets, chain, tokenType)
 
     return {
       type: InteractionResponseType.ChannelMessageWithSource,
@@ -100,6 +63,14 @@ export default async function handler(
 
   function handleApplicationCommand(): APIInteractionResponse {
     const modal = new ModalBuilder().setCustomId(`submit`).setTitle("Submit");
+
+    const hostWallet = new TextInputBuilder()
+      .setCustomId("hostWallet")
+      .setLabel("Host Wallet Address")
+      .setPlaceholder("Wallet Address")
+      .setMaxLength(100)
+      .setStyle(TextInputStyle.Short)
+      .setRequired(true);
 
     const tokenType = new TextInputBuilder()
       .setCustomId("tokenType")
@@ -125,47 +96,26 @@ export default async function handler(
       .setStyle(TextInputStyle.Short)
       .setRequired(true);
 
-    const conditionValue = new TextInputBuilder()
-      .setCustomId("conditionValue")
-      .setLabel("Condition Value")
-      .setPlaceholder("Value for Lens and Cyberconnect/TokenId for ERC1155")
-      .setMaxLength(100)
-      .setStyle(TextInputStyle.Short)
-      .setRequired(false);
-
-    const conditionType = new TextInputBuilder()
-      .setCustomId("conditionType")
-      .setLabel("Condition Type")
-      .setPlaceholder("FOLLOW_HANDLE, HAVE_HANDLE")
-      .setMaxLength(100)
-      .setStyle(TextInputStyle.Short)
-      .setRequired(false);
-
     const firstActionRow =
       new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
-        chain
+        hostWallet
       );
     modal.addComponents(firstActionRow);
     const secondActionRow =
       new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
-        tokenType
+        chain
       );
     modal.addComponents(secondActionRow);
     const thirdActionRow =
       new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
-        tokenAddress
+        tokenType
       );
     modal.addComponents(thirdActionRow);
     const fourthActionRow =
       new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
-        conditionType
+        tokenAddress
       );
     modal.addComponents(fourthActionRow);
-    const fifthActionRow =
-      new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
-        conditionValue
-      );
-    modal.addComponents(fifthActionRow);
 
     const response: APIInteractionResponse = {
       type: InteractionResponseType.Modal,

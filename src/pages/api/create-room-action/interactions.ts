@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { SignatureVerifier } from "@/helpers";
-import type {
+import {
   APIInteractionResponse,
+  getCommandOptionValue,
 } from "@collabland/discord";
 import { InteractionResponseType, MessageFlags } from "@collabland/discord";
 
@@ -12,12 +13,18 @@ export default async function handler(
   const verifier = new SignatureVerifier();
   verifier.verify(req, res);
 
+  const interaction = await req.body;
+  const hostWallet = getCommandOptionValue(interaction, "host-wallets");
+
+  const hostWallets = hostWallet?.split(",");
+
   const apiCall = await fetch(
     "https://iriko.testing.huddle01.com/api/v1/create-iframe-room",
     {
       method: "POST",
       body: JSON.stringify({
         title: "Huddle01 Meet",
+        hostWallets: hostWallets,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +46,6 @@ export default async function handler(
       flags: MessageFlags.Ephemeral,
     },
   };
-  // Return the 1st response to Discord
-
+  
   res.status(200).json(response);
 }
