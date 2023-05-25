@@ -58,7 +58,7 @@ export default function handler(
                 name: "host-wallets",
                 description: "Address of hostWallet",
                 type: ApplicationCommandOptionType.String,
-                required: true,
+                required: false,
               },
             ],
           },

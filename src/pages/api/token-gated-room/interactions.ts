@@ -70,7 +70,7 @@ export default async function handler(
       .setPlaceholder("Wallet Address")
       .setMaxLength(100)
       .setStyle(TextInputStyle.Short)
-      .setRequired(true);
+      .setRequired(false);
 
     const tokenType = new TextInputBuilder()
       .setCustomId("tokenType")
