@@ -64,6 +64,5 @@ export default function handler(
           },
         ],
       };
-      console.log("Status code Metadata", metadata);
       res.send(metadata);
 }
