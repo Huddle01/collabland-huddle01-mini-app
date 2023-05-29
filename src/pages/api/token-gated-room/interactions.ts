@@ -14,10 +14,6 @@ import {
 } from "discord.js";
 import { InteractionType } from "discord-api-types/v10";
 
-export const config = {
-  runtime: 'edge',
-};
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

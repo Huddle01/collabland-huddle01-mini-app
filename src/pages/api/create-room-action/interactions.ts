@@ -6,10 +6,6 @@ import {
 } from "@collabland/discord";
 import { InteractionResponseType, MessageFlags } from "@collabland/discord";
 
-export const config = {
-  runtime: 'edge',
-};
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
