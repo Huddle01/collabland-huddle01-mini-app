@@ -19,7 +19,7 @@ export default async function handler(
   const hostWallets = hostWallet?.split(",");
 
   const apiCall = await fetch(
-    "https://iriko.testing.huddle01.com/api/v1/create-iframe-room",
+    "https://api.huddle01.com/api/v1/create-room",
     {
       method: "POST",
       body: JSON.stringify({

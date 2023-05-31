@@ -30,7 +30,7 @@ export default async function handler(
     const hostWallets = hostWallet?.split(",");
 
     const apiCall = await fetch(
-      "https://iriko.testing.huddle01.com/api/v1/create-iframe-room",
+      "https://api.huddle01.com/api/v1/create-room",
       {
         method: "POST",
         body: JSON.stringify({
@@ -75,7 +75,7 @@ export default async function handler(
     const tokenType = new TextInputBuilder()
       .setCustomId("tokenType")
       .setLabel("Token Type")
-      .setPlaceholder("ERC20/ERC721/ERC1155/SPL/BEP20")
+      .setPlaceholder("ERC20/ERC721/ERC1155/BEP20")
       .setMaxLength(100)
       .setStyle(TextInputStyle.Short)
       .setRequired(true);
@@ -83,7 +83,7 @@ export default async function handler(
     const chain = new TextInputBuilder()
       .setCustomId("chain")
       .setLabel("Chain")
-      .setPlaceholder("ETHEREUM/COSMOS/SOLANA/TEZOS/BSC")
+      .setPlaceholder("ETHEREUM/POLYGON/BSC")
       .setMaxLength(100)
       .setStyle(TextInputStyle.Short)
       .setRequired(true);
