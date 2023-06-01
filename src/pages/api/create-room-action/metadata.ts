@@ -34,6 +34,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         type: InteractionType.ApplicationCommand,
         names: ["create-room-action"],
       },
+      {
+        type: InteractionType.ModalSubmit,
+        ids: ["submit"],
+      },
     ],
     /**
      * Supported Discord application commands. They will be registered to a
@@ -50,14 +54,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         name: "create-room-action",
         type: ApplicationCommandType.ChatInput,
         description: "/create-room-action",
-        options: [
-          {
-            name: "host-wallets",
-            description: "Address of hostWallet",
-            type: ApplicationCommandOptionType.String,
-            required: false,
-          },
-        ],
+        options: [],
       },
     ],
   };

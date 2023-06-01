@@ -127,7 +127,7 @@ export default async function handler(
     return response;
   }
 
-  const interaction = req.body;
+  if (req.method == 'POST') {const interaction = req.body;
 
   const verifier = new SignatureVerifier();
   verifier.verify(req, res);
@@ -150,5 +150,9 @@ export default async function handler(
       }
       break;
     }
+  }} else if (req.method == 'GET') {
+    res.status(200).send('OK');
+  } else {
+    res.status(405).end();
   }
 }
