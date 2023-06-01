@@ -1,8 +1,20 @@
 {
   "crons": [
     {
-      "path": "/api/cron",
-      "schedule": "* * * * *"
+      "path": "/api/create-room-action/interactions",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "path": "/api/create-room-action/metadata",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "path": "/api/create-room-action/interactions",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "path": "/api/create-room-action/metadata",
+      "schedule": "*/15 * * * *"
     }
   ]
 }
