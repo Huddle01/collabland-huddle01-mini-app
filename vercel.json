@@ -1,11 +1,11 @@
 {
   "crons": [
     {
-      "path": "/api/create-room-action/interactions",
+      "path": "/api/token-gated-room/interactions",
       "schedule": "*/15 * * * *"
     },
     {
-      "path": "/api/create-room-action/metadata",
+      "path": "/api/token-gated-room/metadata",
       "schedule": "*/15 * * * *"
     },
     {
