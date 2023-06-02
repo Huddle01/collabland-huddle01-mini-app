@@ -16,7 +16,7 @@ export default async function handler(
   const interaction = await req.body;
   const hostWallet = getCommandOptionValue(interaction, "host-wallets");
 
-  const hostWallets = hostWallet?.split(",");
+  const hostWallets = hostWallet?.split(",") ?? [];
 
   const apiCall = await fetch(
     "https://api.huddle01.com/api/v1/create-room",
@@ -25,6 +25,7 @@ export default async function handler(
       body: JSON.stringify({
         title: "Huddle01 Meet",
         hostWallets: hostWallets,
+        roomLocked: hostWallets.some(wallet => wallet.trim().length <= 10) ? false : true,
       }),
       headers: {
         "Content-Type": "application/json",
