@@ -1,19 +1,19 @@
 {
   "crons": [
     {
-      "path": "/api/token-gated-room/interactions",
+      "path": "/api/create-huddle01-room/interactions",
       "schedule": "*/5 * * * *"
     },
     {
-      "path": "/api/token-gated-room/metadata",
+      "path": "/api/create-huddle01-room/metadata",
       "schedule": "*/5 * * * *"
     },
     {
-      "path": "/api/create-room-action/interactions",
+      "path": "/api/create-huddle01-tokengated-room/interactions",
       "schedule": "*/5 * * * *"
     },
     {
-      "path": "/api/create-room-action/metadata",
+      "path": "/api/create-huddle01-tokengated-room/metadata",
       "schedule": "*/5 * * * *"
     }
   ]
