@@ -9,14 +9,14 @@ import {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const manifest = new MiniAppManifest({
-    appId: "token-gated-room",
+    appId: "create-huddle01-tokengated-room",
     developer: "collab.land",
-    name: "TokenGateRoom",
+    name: "CreateHuddle01TokenGatedRoom",
     platforms: ["discord"],
-    shortName: "token-gated-room",
+    shortName: "create-huddle01-tokengated-room",
     version: { name: "0.0.1" },
-    website: "https://collab.land",
-    description: "An example Collab.Land action",
+    website: "https://huddle01.com",
+    description: "Action to create token gated room for Huddle01",
   });
   const metadata: DiscordActionMetadata = {
     /**
@@ -29,9 +29,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
      */
     supportedInteractions: [
       {
-        // Handle `/token-gated-room` slash command
+        // Handle `/create-huddle01-tokengated-room` slash command
         type: InteractionType.ApplicationCommand,
-        names: ["token-gated-room"],
+        names: ["create-huddle01-tokengated-room"],
       },
       {
         type: InteractionType.ModalSubmit,
@@ -43,16 +43,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
      * Discord guild upon installation.
      */
     applicationCommands: [
-      // `/token-gated-room <your-name>` slash command
+      // `/create-huddle01-tokengated-room <your-name>` slash command
       {
         metadata: {
-          name: "TokenGatedRoom",
-          shortName: "token-gated-room",
+          name: "CreateHuddle01TokenGatedRoom",
+          shortName: "create-huddle01-tokengated-room",
           supportedEnvs: ["production", "development"],
         },
-        name: "token-gated-room",
+        name: "create-huddle01-tokengated-room",
         type: ApplicationCommandType.ChatInput,
-        description: "/token-gated-room",
+        description: "/create-huddle01-tokengated-room",
         options: [],
       },
     ],

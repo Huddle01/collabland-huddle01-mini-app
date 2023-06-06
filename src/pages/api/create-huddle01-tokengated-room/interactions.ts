@@ -29,29 +29,24 @@ export default async function handler(
 
     const hostWallets = hostWallet?.split(",");
 
-    const apiCall = await fetch(
-      "https://api.huddle01.com/api/v1/create-room",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          title: "Huddle01 Meet",
-          hostWallets: hostWallets,
-          tokenType: tokenType,
-          chain: chain,
-          contractAddress: [tokenAddress],
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": process.env.API_KEY || "",
-        },
-      }
-    );
+    const apiCall = await fetch("https://api.huddle01.com/api/v1/create-room", {
+      method: "POST",
+      body: JSON.stringify({
+        title: "Huddle01 Meet",
+        hostWallets: hostWallets,
+        tokenType: tokenType,
+        chain: chain,
+        contractAddress: [tokenAddress],
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": process.env.API_KEY || "",
+      },
+    });
 
     const apiResponse = await apiCall.json();
 
     const message = `Your meeting Link: ${apiResponse?.data?.meetingLink}`;
-
-    console.log(tokenAddress, hostWallets, chain, tokenType)
 
     return {
       type: InteractionResponseType.ChannelMessageWithSource,
@@ -127,32 +122,34 @@ export default async function handler(
     return response;
   }
 
-  if (req.method == 'POST') {const interaction = req.body;
+  if (req.method == "POST") {
+    const interaction = req.body;
 
-  const verifier = new SignatureVerifier();
-  verifier.verify(req, res);
-  switch (interaction.type) {
-    case InteractionType.ApplicationCommand: {
-      try {
-        const response = handleApplicationCommand();
-        res.status(200).json(response);
-      } catch (error) {
-        console.log(error);
+    const verifier = new SignatureVerifier();
+    verifier.verify(req, res);
+    switch (interaction.type) {
+      case InteractionType.ApplicationCommand: {
+        try {
+          const response = handleApplicationCommand();
+          res.status(200).json(response);
+        } catch (error) {
+          console.log(error);
+        }
+        break;
       }
-      break;
-    }
-    case InteractionType.ModalSubmit: {
-      try {
-        const response = await handleModalSubmit(interaction);
-        res.status(200).json(response);
-      } catch (error) {
-        console.log(error);
+      case InteractionType.ModalSubmit: {
+        try {
+          const response = await handleModalSubmit(interaction);
+          res.status(200).json(response);
+        } catch (error) {
+          console.log(error);
+        }
+        break;
       }
-      break;
     }
-  }} else if (req.method == 'GET') {
-    res.status(200).send('OK');
+  } else if (req.method == "GET") {
+    res.status(200).send("OK");
   } else {
-    res.status(405).end();
+    res.status(405).send("Method Not Allowed");
   }
 }

@@ -10,14 +10,14 @@ import {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const manifest = new MiniAppManifest({
-    appId: "create-room-action",
+    appId: "create-huddle01-room",
     developer: "collab.land",
-    name: "CreateRoomAction",
+    name: "CreateHuddle01Room",
     platforms: ["discord"],
-    shortName: "create-room-action",
+    shortName: "create-huddle01-room",
     version: { name: "0.0.1" },
-    website: "https://collab.land",
-    description: "action to create room in huddle01",
+    website: "https://huddle01.com",
+    description: "Action to create room for Huddle01",
   });
   const metadata: DiscordActionMetadata = {
     /**
@@ -30,9 +30,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
      */
     supportedInteractions: [
       {
-        // Handle `/create-room-action` slash command
+        // Handle `/create-huddle01-room` slash command
         type: InteractionType.ApplicationCommand,
-        names: ["create-room-action"],
+        names: ["create-huddle01-room"],
       },
     ],
     /**
@@ -40,16 +40,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
      * Discord guild upon installation.
      */
     applicationCommands: [
-      // `/create-room-action` slash command
+      // `/create-huddle01-room` slash command
       {
         metadata: {
-          name: "CreateRoomAction",
-          shortName: "create-room-action",
+          name: "CreateHuddle01Room",
+          shortName: "create-huddle01-room",
           supportedEnvs: ["production", "development"],
         },
-        name: "create-room-action",
+        name: "create-huddle01-room",
         type: ApplicationCommandType.ChatInput,
-        description: "/create-room-action",
+        description: "/create-huddle01-room",
         options: [
           {
             name: "host-wallets",
