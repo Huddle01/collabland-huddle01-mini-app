@@ -13,6 +13,7 @@ import {
   TextInputBuilder,
 } from "discord.js";
 import { InteractionType } from "discord-api-types/v10";
+import { isAddress } from "ethers/lib/utils";
 
 export default async function handler(
   req: NextApiRequest,
@@ -29,24 +30,37 @@ export default async function handler(
 
     const hostWallets = hostWallet?.split(",");
 
-    const apiCall = await fetch("https://api.huddle01.com/api/v1/create-room", {
-      method: "POST",
-      body: JSON.stringify({
-        title: "Huddle01 Meet",
-        hostWallets: hostWallets,
-        tokenType: tokenType,
-        chain: chain,
-        contractAddress: [tokenAddress],
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": process.env.API_KEY || "",
-      },
-    });
+    let message = "";
 
-    const apiResponse = await apiCall.json();
+    if (!isAddress(tokenAddress)) {
+      message = "Invalid Token Address";
+    } else if (hostWallets.includes(tokenAddress)) {
+      message = "Token Address is already present in host wallets";
+    } else if (!["ERC20", "ERC721", "ERC1155", "BEP20"].includes(tokenType)) {
+      message = "Invalid Token Type";
+    } else if (!["ETHEREUM", "POLYGON", "BSC"].includes(chain)) {
+      message = "Invalid Chain";
+    } else {
+      const apiCall = fetch("https://api.huddle01.com/api/v1/create-room", {
+        method: "POST",
+        body: JSON.stringify({
+          title: "Huddle01 Meet",
+          hostWallets,
+          tokenType,
+          chain,
+          contractAddress: [tokenAddress],
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": process.env.API_KEY || "",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => `Your meeting Link: ${data?.data?.meetingLink}`)
+        .catch((error) => `Error: ${error.message}`);
 
-    const message = `Your meeting Link: ${apiResponse?.data?.meetingLink}`;
+      message = await apiCall;
+    }
 
     return {
       type: InteractionResponseType.ChannelMessageWithSource,
