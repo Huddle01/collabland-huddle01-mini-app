@@ -27,6 +27,7 @@ export default async function handler(
     const chain = components?.[1]?.components[0]?.value;
     const tokenType = components?.[2]?.components[0]?.value;
     const tokenAddress = components?.[3]?.components[0]?.value;
+    const conditionValue = components?.[4]?.components[0]?.value;
 
     const hostWallets = hostWallet?.split(",");
 
@@ -36,7 +37,7 @@ export default async function handler(
       message = "Invalid Token Address";
     } else if (hostWallets.includes(tokenAddress)) {
       message = "Token Address is already present in host wallets";
-    } else if (!["ERC20", "ERC721", "ERC1155", "BEP20"].includes(tokenType)) {
+    } else if (!["ERC20", "ERC721", "ERC1155", "BEP20", "BEP721"].includes(tokenType)) {
       message = "Invalid Token Type";
     } else if (!["ETHEREUM", "POLYGON", "BSC"].includes(chain)) {
       message = "Invalid Chain";
@@ -49,6 +50,7 @@ export default async function handler(
           tokenType,
           chain,
           contractAddress: [tokenAddress],
+          conditionValue: conditionValue,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -75,8 +77,8 @@ export default async function handler(
 
     const hostWallet = new TextInputBuilder()
       .setCustomId("hostWallet")
-      .setLabel("Host Wallet Address")
-      .setPlaceholder("Wallet Address")
+      .setLabel("Host Wallet Addresses (Comma Separated)")
+      .setPlaceholder("Wallet Addresses")
       .setMaxLength(100)
       .setStyle(TextInputStyle.Short)
       .setRequired(false);
@@ -84,7 +86,7 @@ export default async function handler(
     const tokenType = new TextInputBuilder()
       .setCustomId("tokenType")
       .setLabel("Token Type")
-      .setPlaceholder("ERC20/ERC721/ERC1155/BEP20")
+      .setPlaceholder("ERC20/ERC721/ERC1155/BEP20/BEP721")
       .setMaxLength(100)
       .setStyle(TextInputStyle.Short)
       .setRequired(true);
@@ -104,6 +106,14 @@ export default async function handler(
       .setMaxLength(100)
       .setStyle(TextInputStyle.Short)
       .setRequired(true);
+
+    const conditionValue = new TextInputBuilder()
+      .setCustomId("conditionValue")
+      .setLabel("TokenId for ERC1155 (Optional)")
+      .setPlaceholder("")
+      .setMaxLength(100)
+      .setStyle(TextInputStyle.Short)
+      .setRequired(false);
 
     const firstActionRow =
       new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
@@ -125,6 +135,11 @@ export default async function handler(
         tokenAddress
       );
     modal.addComponents(fourthActionRow);
+    const fifthActionRow =
+      new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(
+        conditionValue
+      );
+    modal.addComponents(fifthActionRow);
 
     const response: APIInteractionResponse = {
       type: InteractionResponseType.Modal,
