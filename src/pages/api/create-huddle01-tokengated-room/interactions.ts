@@ -14,6 +14,7 @@ import {
 } from "discord.js";
 import { InteractionType } from "discord-api-types/v10";
 import { isAddress } from "ethers/lib/utils";
+import { ethers } from 'ethers';
 
 export default async function handler(
   req: NextApiRequest,
@@ -37,8 +38,15 @@ export default async function handler(
       message = "Invalid Token Address";
     } else if (hostWallets.includes(tokenAddress)) {
       message = "Token Address is already present in host wallets";
-    } else if (!["ERC20", "ERC721", "ERC1155", "BEP20", "BEP721"].includes(tokenType)) {
+    } else if (
+      !["ERC20", "ERC721", "ERC1155", "BEP20", "BEP721"].includes(tokenType)
+    ) {
       message = "Invalid Token Type";
+    } else if (
+      (tokenType == "BEP20" || tokenType == "BEP721") &&
+      chain != "BSC"
+    ) {
+      message = "Invalid Chain for BEP20/BEP721";
     } else if (!["ETHEREUM", "POLYGON", "BSC"].includes(chain)) {
       message = "Invalid Chain";
     } else {
