@@ -32,8 +32,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       {
         // Handle `/create-huddle01-room` slash command
         type: InteractionType.ApplicationCommand,
-        names: ["create-huddle01-room"],
+        names: ["create-huddle01-room", "create-huddle01-tokengated-room"],
       },
+      {
+        type: InteractionType.ModalSubmit,
+        ids: ["submit"],
+      }
     ],
     /**
      * Supported Discord application commands. They will be registered to a
@@ -58,6 +62,17 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             required: true,
           },
         ],
+      },
+      {
+        metadata: {
+          name: "CreateHuddle01TokenGatedRoom",
+          shortName: "create-huddle01-tokengated-room",
+          supportedEnvs: ["production", "development"],
+        },
+        name: "create-huddle01-tokengated-room",
+        type: ApplicationCommandType.ChatInput,
+        description: "/create-huddle01-tokengated-room",
+        options: [],
       },
     ],
   };

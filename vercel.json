@@ -7,14 +7,6 @@
     {
       "path": "/api/create-huddle01-room/metadata",
       "schedule": "*/5 * * * *"
-    },
-    {
-      "path": "/api/create-huddle01-tokengated-room/interactions",
-      "schedule": "*/5 * * * *"
-    },
-    {
-      "path": "/api/create-huddle01-tokengated-room/metadata",
-      "schedule": "*/5 * * * *"
     }
   ]
 }
