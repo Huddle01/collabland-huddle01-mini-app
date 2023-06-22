@@ -28,7 +28,7 @@ export const handleCreateRoomAction = async (
     });
 
     const apiResponse = await apiCall.json();
-    const message = `Your meeting Link: ${apiResponse.data.meetingLink}`;
+    const message = `### Here's is your Meeting Link \nMeeting Link: ${apiResponse?.data?.meetingLink}\n\nPowered by [Huddle01](https://huddle01.com)`;
 
     const response: APIInteractionResponse = {
       type: InteractionResponseType.ChannelMessageWithSource,

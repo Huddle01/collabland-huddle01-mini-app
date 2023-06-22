@@ -3,7 +3,7 @@ import {
   APIModalSubmitInteraction,
   TextInputStyle,
 } from "@collabland/discord";
-import { InteractionResponseType } from "@collabland/discord";
+import { InteractionResponseType, MessageFlags } from "@collabland/discord";
 import {
   ActionRowBuilder,
   ModalActionRowComponentBuilder,
@@ -58,7 +58,7 @@ export async function handleModalSubmit(
       },
     })
       .then((response) => response.json())
-      .then((data) => `Your meeting Link: ${data?.data?.meetingLink}`)
+      .then((data) => `### Here's is your Meeting Link \nMeeting Link: ${data?.data?.meetingLink}\n\nPowered by [Huddle01](https://huddle01.com)`)
       .catch((error) => `Error: ${error.message}`);
 
     message = await apiCall;
@@ -68,6 +68,7 @@ export async function handleModalSubmit(
     type: InteractionResponseType.ChannelMessageWithSource,
     data: {
       content: message,
+      flags: MessageFlags.Ephemeral,
     },
   };
 }
