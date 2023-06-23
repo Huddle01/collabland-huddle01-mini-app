@@ -5,7 +5,7 @@ import {
   } from "@collabland/discord";
   import { InteractionResponseType } from "@collabland/discord";
 
-export const handleCreateRoomAction = async (
+export const handleCreateMeetAction = async (
     interaction: APIChatInputApplicationCommandInteraction
   ) => {
     const hostWallet = getCommandOptionValue(interaction, "host-wallets") ?? "";

@@ -4,8 +4,8 @@ import { InteractionType } from "discord-api-types/v10";
 import {
   handleModalSubmit,
   handleApplicationCommand,
-} from "@/helpers/createTokenGatedRoom";
-import { handleCreateRoomAction } from "@/helpers/createRoom";
+} from "@/helpers/createTokenGatedMeet";
+import { handleCreateMeetAction } from "@/helpers/createMeet";
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,11 +16,11 @@ export default async function handler(
   if (req.method == "POST") {
     const interaction = await req.body;
     switch (interaction.data.name) {
-      case "create-huddle01-room":
-        const response = await handleCreateRoomAction(interaction);
+      case "create-huddle01-meet":
+        const response = await handleCreateMeetAction(interaction);
         return res.status(200).json(response);
         break;
-      case "create-huddle01-tokengated-room":
+      case "create-huddle01-tokengated-meet":
         switch (interaction.type) {
           case InteractionType.ApplicationCommand: {
             try {
@@ -46,12 +46,12 @@ export default async function handler(
     switch (interaction.type) {
       case InteractionType.ApplicationCommand: {
         switch (interaction.data.name) {
-          case "create-huddle01-room": {
-            const response = await handleCreateRoomAction(interaction);
+          case "create-huddle01-meet": {
+            const response = await handleCreateMeetAction(interaction);
             return res.status(200).json(response);
             break;
           }
-          case "create-huddle01-tokengated-room": {
+          case "create-huddle01-tokengated-meet": {
             try {
               const response = handleApplicationCommand();
               return res.status(200).json(response);

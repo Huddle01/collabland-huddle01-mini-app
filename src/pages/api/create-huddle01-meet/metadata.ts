@@ -10,14 +10,14 @@ import {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const manifest = new MiniAppManifest({
-    appId: "create-huddle01-room",
+    appId: "create-huddle01-meet",
     developer: "collab.land",
-    name: "CreateHuddle01Room",
+    name: "CreateHuddle01Meet",
     platforms: ["discord"],
-    shortName: "create-huddle01-room",
+    shortName: "create-huddle01-meet",
     version: { name: "0.0.1" },
     website: "https://huddle01.com",
-    description: "Action to create room for Huddle01",
+    description: "Action to create meet for Huddle01",
   });
   const metadata: DiscordActionMetadata = {
     /**
@@ -30,9 +30,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
      */
     supportedInteractions: [
       {
-        // Handle `/create-huddle01-room` slash command
+        // Handle `/create-huddle01-meet` slash command
         type: InteractionType.ApplicationCommand,
-        names: ["create-huddle01-room", "create-huddle01-tokengated-room"],
+        names: ["create-huddle01-meet", "create-huddle01-tokengated-meet"],
       },
       {
         type: InteractionType.ModalSubmit,
@@ -44,16 +44,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
      * Discord guild upon installation.
      */
     applicationCommands: [
-      // `/create-huddle01-room` slash command
+      // `/create-huddle01-meet` slash command
       {
         metadata: {
-          name: "CreateHuddle01Room",
-          shortName: "create-huddle01-room",
+          name: "CreateHuddle01Meet",
+          shortName: "create-huddle01-meet",
           supportedEnvs: ["production", "development"],
         },
-        name: "create-huddle01-room",
+        name: "create-huddle01-meet",
         type: ApplicationCommandType.ChatInput,
-        description: "/create-huddle01-room",
+        description: "/create-huddle01-meet",
         options: [
           {
             name: "host-wallets",
@@ -63,15 +63,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           },
         ],
       },
+      // `/create-huddle01-tokengated-meet` slash command
       {
         metadata: {
-          name: "CreateHuddle01TokenGatedRoom",
-          shortName: "create-huddle01-tokengated-room",
+          name: "CreateHuddle01TokenGatedMeet",
+          shortName: "create-huddle01-tokengated-meet",
           supportedEnvs: ["production", "development"],
         },
-        name: "create-huddle01-tokengated-room",
+        name: "create-huddle01-tokengated-meet",
         type: ApplicationCommandType.ChatInput,
-        description: "/create-huddle01-tokengated-room",
+        description: "/create-huddle01-tokengated-meet",
         options: [],
       },
     ],
