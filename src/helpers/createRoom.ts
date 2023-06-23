@@ -3,7 +3,7 @@ import {
     getCommandOptionValue,
     APIChatInputApplicationCommandInteraction,
   } from "@collabland/discord";
-  import { InteractionResponseType, MessageFlags } from "@collabland/discord";
+  import { InteractionResponseType } from "@collabland/discord";
 
 export const handleCreateRoomAction = async (
     interaction: APIChatInputApplicationCommandInteraction
@@ -28,13 +28,12 @@ export const handleCreateRoomAction = async (
     });
 
     const apiResponse = await apiCall.json();
-    const message = `### Here's is your Meeting Link \nMeeting Link: ${apiResponse?.data?.meetingLink}\n\nPowered by [Huddle01](https://huddle01.com)`;
+    const message = `### Here's is your Meeting Link :link:\n\nJoin in: ${apiResponse?.data?.meetingLink}\n\nPowered by [Huddle01](https://huddle01.com)`;
 
     const response: APIInteractionResponse = {
       type: InteractionResponseType.ChannelMessageWithSource,
       data: {
         content: message,
-        flags: MessageFlags.Ephemeral,
       },
     };
 
