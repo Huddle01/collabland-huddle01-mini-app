@@ -21,23 +21,24 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     tags: ['communication', 'meetings', 'token-gated', 'live-video', 'huddle01'],
     shortDescription: "Your one app to meet, work or hang out. Enjoy exciting features like wallet login, token-gating, live streaming, recording, NFTs as PFPs, DIDs as display names and much more on Huddle01.",
     description: `
+    Your one app to meet, work or hang out. Enjoy exciting features like wallet and social login, token-gating, live streaming, recording, NFTs as PFPs, DIDs as display names and much more on Huddle01.
+    
     ### More about Huddle01
-    [Huddle01](https://huddle01.com) is building the decentralized real-time communication network. Our current suite of developer-friendly SDKs enable live audio/video communication with just a quick plug in, helping apps deliver immersive and engaging live experiences to their users.
-        
-    Huddle01 also offers a video meeting app, built on its very own media infrastructure that powers wallet-to-wallet audio/video communication with additional features like token-gating, live streaming, decentralized storage and more coming soon.    
-        
+
+    Building the decentralized real-time communication network. Our current suite of developer-friendly SDKs enable powerful audio/video experiences for web and mobile app with just a quick plug in.
+   
     ### Commands Description
-        
+            
     /create-huddle01-meet
     - creates a room for meeting
     - accepts host-wallet address as the parameter
-    
+    --
     /create-huddle01-token-gated-meet
-    - creates a token-gated meeting
-    - allows a person to token-gated their meeting on chains
+      - creates a token-gated meeting
+      - allows a person to token-gated their meeting on chains
         - Ethereum (ERC20, ERC721, ERC1155) 
         - Polygon (ERC20, ERC721, ERC1155)
-        - BSC (BEP20, BEP721) `,
+        - BSC (BEP20, BEP721)`,
   });
   const metadata: DiscordActionMetadata = {
     /**
