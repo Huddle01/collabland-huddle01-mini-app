@@ -10,14 +10,34 @@ import {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const manifest = new MiniAppManifest({
-    appId: "create-huddle01-meet",
-    developer: "collab.land",
-    name: "CreateHuddle01Meet",
+    appId: "Huddle01",
+    developer: "Huddle01",
+    name: "Huddle01",
     platforms: ["discord"],
-    shortName: "create-huddle01-meet",
+    shortName: "Huddle01",
     version: { name: "0.0.1" },
     website: "https://huddle01.com",
-    description: "Action to create meet for Huddle01",
+    keywords: ['communication', 'meetings', 'token-gated', 'live-video', 'huddle01'],
+    tags: ['communication', 'meetings', 'token-gated', 'live-video', 'huddle01'],
+    shortDescription: "Your one app to meet, work or hang out. Enjoy exciting features like wallet login, token-gating, live streaming, recording, NFTs as PFPs, DIDs as display names and much more on Huddle01.",
+    description: `
+    ### More about Huddle01
+    [Huddle01](https://huddle01.com) is building the decentralized real-time communication network. Our current suite of developer-friendly SDKs enable live audio/video communication with just a quick plug in, helping apps deliver immersive and engaging live experiences to their users.
+        
+    Huddle01 also offers a video meeting app, built on its very own media infrastructure that powers wallet-to-wallet audio/video communication with additional features like token-gating, live streaming, decentralized storage and more coming soon.    
+        
+    ### Commands Description
+        
+    /create-huddle01-meet
+    - creates a room for meeting
+    - accepts host-wallet address as the parameter
+    
+    /create-huddle01-token-gated-meet
+    - creates a token-gated meeting
+    - allows a person to token-gated their meeting on chains
+        - Ethereum (ERC20, ERC721, ERC1155) 
+        - Polygon (ERC20, ERC721, ERC1155)
+        - BSC (BEP20, BEP721) `,
   });
   const metadata: DiscordActionMetadata = {
     /**
@@ -37,7 +57,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       {
         type: InteractionType.ModalSubmit,
         ids: ["submit"],
-      }
+      },
     ],
     /**
      * Supported Discord application commands. They will be registered to a
