@@ -17,28 +17,49 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     shortName: "Huddle01",
     version: { name: "0.0.1" },
     website: "https://huddle01.com",
-    keywords: ['communication', 'meetings', 'token-gated', 'live-video', 'huddle01'],
-    tags: ['communication', 'meetings', 'token-gated', 'live-video', 'huddle01'],
-    shortDescription: "Your one app to meet, work or hang out. Enjoy exciting features like wallet login, token-gating, live streaming, recording, NFTs as PFPs, DIDs as display names and much more on Huddle01.",
+    keywords: [
+      "communication",
+      "meetings",
+      "token-gated",
+      "live-video",
+      "huddle01",
+    ],
+    tags: [
+      "communication",
+      "meetings",
+      "token-gated",
+      "live-video",
+      "huddle01",
+    ],
+    shortDescription:
+      "Your one app to meet, work or hang out. Enjoy exciting features like wallet login, token-gating, live streaming, recording, NFTs as PFPs, DIDs as display names and much more on Huddle01.",
     description: `
     Your one app to meet, work or hang out. Enjoy exciting features like wallet and social login, token-gating, live streaming, recording, NFTs as PFPs, DIDs as display names and much more on Huddle01.
     
     ### More about Huddle01
 
     Building the decentralized real-time communication network. Our current suite of developer-friendly SDKs enable powerful audio/video experiences for web and mobile app with just a quick plug in.
-   
-    ### Commands Description
-            
-    /create-huddle01-meet
-    - creates a room for meeting
-    - accepts host-wallet address as the parameter
-    --
-    /create-huddle01-token-gated-meet
-      - creates a token-gated meeting
-      - allows a person to token-gated their meeting on chains
-        - Ethereum (ERC20, ERC721, ERC1155) 
-        - Polygon (ERC20, ERC721, ERC1155)
-        - BSC (BEP20, BEP721)`,
+
+    `,
+    thumbnails: [
+      {
+        label: 'Member Directory',
+        src: 'https://huddle01-assets-frontend.s3.amazonaws.com/general/AppIcon.png',
+        sizes: '40x40',
+      },
+        {
+          label: 'Overview',
+          src: 'https://huddle01-assets-frontend.s3.amazonaws.com/general/AppIcon.png',
+          sizes: '40x40',
+        }
+    ],
+    icons: [
+      {
+        label: 'AppIcon',
+        src: 'https://huddle01-assets-frontend.s3.amazonaws.com/general/AppIcon.png',
+        sizes: '40x40'
+      }
+    ]
   });
   const metadata: DiscordActionMetadata = {
     /**
@@ -74,7 +95,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         },
         name: "create-huddle01-meet",
         type: ApplicationCommandType.ChatInput,
-        description: "/create-huddle01-meet",
+        description: "Allows you to create normal huddle01 meeting link",
         options: [
           {
             name: "host-wallets",
@@ -93,7 +114,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         },
         name: "create-huddle01-tokengated-meet",
         type: ApplicationCommandType.ChatInput,
-        description: "/create-huddle01-tokengated-meet",
+        description: "Allows you to create token gated meeting link",
         options: [],
       },
     ],

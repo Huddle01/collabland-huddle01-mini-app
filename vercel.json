@@ -5,6 +5,10 @@
       "schedule": "*/5 * * * *"
     },
     {
+      "path": "/api/create-huddle01-tokengated-meet/interactions",
+      "schedule": "*/5 * * * *"
+    },
+    {
       "path": "/api/create-huddle01-meet/metadata",
       "schedule": "*/5 * * * *"
     }
