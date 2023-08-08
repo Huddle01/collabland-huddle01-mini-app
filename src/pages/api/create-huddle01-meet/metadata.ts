@@ -33,25 +33,35 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     ],
     shortDescription:
       "Your one app to meet, work or hang out. Enjoy exciting features like wallet login, token-gating, live streaming, recording, NFTs as PFPs, DIDs as display names and much more on Huddle01.",
-    description: `
-    Your one app to meet, work or hang out. Enjoy exciting features like wallet and social login, token-gating, live streaming, recording, NFTs as PFPs, DIDs as display names and much more on Huddle01.
-    
-    ### More about Huddle01
-
-    Building the decentralized real-time communication network. Our current suite of developer-friendly SDKs enable powerful audio/video experiences for web and mobile app with just a quick plug in.
-
-    `,
+    description: `Your one app to meet, work or hang out. Enjoy exciting features like wallet and social login, token-gating, live streaming, recording, NFTs as PFPs, DIDs as display names and much more on Huddle01.
+### More about Huddle01 
+Building the decentralized real-time communication network. Our current suite of developer-friendly SDKs enable powerful audio/video experiences for web and mobile app with just a quick plug in.`,
     thumbnails: [
       {
-        label: 'Member Directory',
-        src: 'https://huddle01-assets-frontend.s3.amazonaws.com/general/AppIcon.png',
-        sizes: '40x40',
+        label: "Huddle01 Meet Command",
+        src: "https://huddle01-assets-frontend.s3.amazonaws.com/collabland/Collabland-1.png",
+        sizes: "40x40",
       },
-        {
-          label: 'Overview',
-          src: 'https://huddle01-assets-frontend.s3.amazonaws.com/general/AppIcon.png',
-          sizes: '40x40',
-        }
+      {
+        label: "Token Gated Meet Command",
+        src: "https://huddle01-assets-frontend.s3.amazonaws.com/collabland/Collabland-2.png",
+        sizes: "40x40",
+      },
+      {
+        label: "Hostwallet address",
+        src: "https://huddle01-assets-frontend.s3.amazonaws.com/collabland/Collabland-3.png",
+        sizes: "40x40",
+      },
+      {
+        label: "Huddle01 Room Id",
+        src: "https://huddle01-assets-frontend.s3.amazonaws.com/collabland/Collabland-4.png",
+        sizes: "40x40",
+      },
+      {
+        label: "Huddle01 room overview",
+        src: "https://huddle01-assets-frontend.s3.amazonaws.com/collabland/Collabland-5.png",
+        sizes: "40x40",
+      },
     ],
     icons: [
       {
