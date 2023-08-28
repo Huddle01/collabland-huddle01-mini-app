@@ -111,7 +111,7 @@ Building the decentralized real-time communication network. Our current suite of
             name: "host-wallets",
             description: "Enter the wallet address / NA",
             type: ApplicationCommandOptionType.String,
-            required: true,
+            required: false,
           },
         ],
       },
