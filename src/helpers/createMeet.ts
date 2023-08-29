@@ -28,7 +28,7 @@ export const handleCreateMeetAction = async (
     });
 
     const apiResponse = await apiCall.json();
-    const message = `### Here's is your Meeting Link :link:\n\nJoin in: ${apiResponse?.data?.meetingLink}\n\nPowered by [Huddle01](https://huddle01.com)`;
+    const message = `### Here's is your Meeting Link :link:\n\nJoin in: ${apiResponse?.data?.meetingLink}\n\nPowered by [Huddle01](<https://huddle01.com>)`;
 
     const response: APIInteractionResponse = {
       type: InteractionResponseType.ChannelMessageWithSource,
