@@ -12,7 +12,7 @@ export const handleCreateMeetAction = async (
 
     const hostWallets = hostWallet?.split(",") ?? [];
 
-    const apiCall = await fetch("https://api.huddle01.com/api/v1/create-room", {
+    const apiCall = await fetch("https://api.huddle01.com/api/v1/admin/create-meeting", {
       method: "POST",
       body: JSON.stringify({
         title: "Huddle01 Meet",
@@ -20,6 +20,7 @@ export const handleCreateMeetAction = async (
         roomLocked: hostWallets.some((wallet) => wallet.trim().length <= 10)
           ? false
           : true,
+        otherSource: "COLLABLAND"
       }),
       headers: {
         "Content-Type": "application/json",

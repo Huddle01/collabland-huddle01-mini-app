@@ -42,7 +42,7 @@ export async function handleModalSubmit(
   } else if (!["ETHEREUM", "POLYGON", "BSC"].includes(chain)) {
     message = "Invalid Chain";
   } else {
-    const apiCall = fetch("https://api.huddle01.com/api/v1/create-room", {
+    const apiCall = fetch("https://api.huddle01.com/api/v1/admin/create-meeting", {
       method: "POST",
       body: JSON.stringify({
         title: "Huddle01 Meet",
@@ -51,6 +51,7 @@ export async function handleModalSubmit(
         chain,
         contractAddress: [tokenAddress],
         conditionValue: conditionValue,
+        otherSource: "COLLABLAND"
       }),
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +79,7 @@ export function handleApplicationCommand(): APIInteractionResponse {
   const hostWallet = new TextInputBuilder()
     .setCustomId("hostWallet")
     .setLabel("Host Wallet Addresses (Comma Separated)")
-    .setPlaceholder("Wallet Addresses")
+    .setPlaceholder("Wallet Addresses (ENS not supported)")
     .setMaxLength(100)
     .setStyle(TextInputStyle.Short)
     .setRequired(false);

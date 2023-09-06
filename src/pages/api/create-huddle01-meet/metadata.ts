@@ -109,7 +109,7 @@ Building the decentralized real-time communication network. Our current suite of
         options: [
           {
             name: "host-wallets",
-            description: "Enter the wallet address / NA",
+            description: "Enter the wallet address (ENS not supported)",
             type: ApplicationCommandOptionType.String,
             required: false,
           },
